@@ -1,40 +1,46 @@
-import cherrypy
+'''
+Module which acts as a server, and processes the requests of clients
+'''
 import uuid
 import os
 import subprocess
+import cherrypy
 
-IMAGE_DIRECTORY = "image"
+IMAGE_DIRECTORY = "server-image"
 DOCKER_COMMAND = "dir"
 
 class Server(object):
+    ''' Server class '''
     @cherrypy.expose
     def index(self):
+        ''' Serves /index path '''
         return "Welcome to the FYP Server. POST /analyse [image file] : plain/text"
-    
+
     @cherrypy.expose
     def analyse(self, img):
-        imgName = uuid.uuid4().hex
+        ''' Serves /analyse path '''
+        imgname = uuid.uuid4().hex
         all_data = bytearray()
         # check if directory exists, if not creates one
         if not os.path.exists(IMAGE_DIRECTORY):
             os.makedirs(IMAGE_DIRECTORY)
         # image will be saved with name IMAGE_DIRECTORY/id
-        fname = os.path.join(IMAGE_DIRECTORY, imgName)
-        f = open(fname, "wb")
+        fname = os.path.join(IMAGE_DIRECTORY, imgname)
+        _file = open(fname, "wb")
         while True:
             data = img.file.read(8192)
             all_data += data
             if not data:
                 break
         # write image data to file
-        f.write(all_data)
-        f.close()
+        _file.write(all_data)
+        _file.close()
         # run docker command
-        result = subprocess.run(DOCKER_COMMAND, stdout=subprocess.PIPE, shell=True)
+        result = subprocess.check_output(DOCKER_COMMAND, shell=True)
         # delete file
         if os.path.exists(fname):
             os.remove(fname)
-        return result.stdout
+        return result.decode("utf-8")
 
 if __name__ == "__main__":
     cherrypy.quickstart(Server())
