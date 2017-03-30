@@ -37,9 +37,10 @@ class Connection:
                 CaptureThread().start()
                 self.in_session = True
             else:
-                self.signal_back(data, data * 2)
+                self.signal_back(d, d * 2)
         else:
             if self.in_session:
+                print("out of session")
                 self.in_session = False
                 self.signal_back(text="Welcome!")
 
