@@ -2,8 +2,8 @@
 
 from platform import system
 import serial
-from cam import capture
-from client import Post
+from signal_back_thread import SignalBackThread
+from capture_thread import CaptureThread
 
 SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 BAUDRATE = 9600
@@ -19,16 +19,15 @@ class Connection:
 
     def signal_back(self, data, price):
         ''' Writes back to serial '''
-        self.ser.write('<{} {} gm Rs. {}>'.format(self.item, data, price))
+        # self.ser.write('<{} {} gm Rs. {}>'.format(self.item, data, price))
+        SignalBackThread(self.ser, self.item, data, price)
 
     def process(self, data):
         ''' Processes the value obtained from the serial '''
         # Code to multiply with Price comes here
         if int(data) >= MIN_WEIGHT:
             if not self.in_session:
-                loc = capture()
-                # post = Post(loc)
-                # self.item = post.response.text
+                CaptureThread()
                 self.in_session = True
             else:
                 self.signal_back(data, data * 2)
