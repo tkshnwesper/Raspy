@@ -21,7 +21,7 @@ class Connection:
     def signal_back(self, data, price):
         ''' Writes back to serial '''
         # self.ser.write('<{} {} gm Rs. {}>'.format(self.item, data, price))
-        SignalBackThread(self.ser, self.item, data, price)
+        SignalBackThread(self.ser, self.item, data, price).start()
 
     def process(self, data):
         ''' Processes the value obtained from the serial '''
@@ -30,9 +30,10 @@ class Connection:
             d = int(data)
         except ValueError:
             d = 0
+        print('data = {}'.format(d))
         if d >= MIN_WEIGHT:
             if not self.in_session:
-                CaptureThread()
+                CaptureThread().start()
                 self.in_session = True
             else:
                 self.signal_back(data, data * 2)
