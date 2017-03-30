@@ -24,7 +24,7 @@ class Connection:
     def process(self, data):
         ''' Processes the value obtained from the serial '''
         # Code to multiply with Price comes here
-        if data >= MIN_WEIGHT:
+        if int(data) >= MIN_WEIGHT:
             if not self.in_session:
                 loc = capture()
                 # post = Post(loc)
