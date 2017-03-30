@@ -27,7 +27,7 @@ class Connection:
         ''' Processes the value obtained from the serial '''
         # Code to multiply with Price comes here
         try:
-            d = int(data)
+            d = float(data)
         except ValueError:
             d = 0
         print('data = {}'.format(d))
