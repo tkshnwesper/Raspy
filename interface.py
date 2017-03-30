@@ -20,7 +20,7 @@ class Connection:
 
     def signal_back(self, data=0, price=0, text=''):
         ''' Writes back to serial '''
-        if text != '':
+        if text == '':
             text = '<{} {} gm Rs. {}>'.format(self.item, data, price)
         SignalBackThread(self.ser, text).start()
 
@@ -41,7 +41,7 @@ class Connection:
         else:
             if self.in_session:
                 self.in_session = False
-                self.signal_back("Welcome!")
+                self.signal_back(text="Welcome!")
 
     def start(self):
         ''' Starts the Connection '''
