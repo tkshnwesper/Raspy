@@ -5,7 +5,6 @@ from platform import system
 import serial
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
-import time
 
 SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 BAUDRATE = 9600
@@ -21,11 +20,9 @@ class Connection:
 
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
-        if sleep > 0:
-            time.sleep(sleep)
         if text == '':
             text = '<{} {} gm Rs. {}>'.format(self.item, data, price)
-        SignalBackThread(self.ser, text).start()
+        SignalBackThread(self.ser, text, sleep).start()
 
     def process(self, data):
         ''' Processes the value obtained from the serial '''
