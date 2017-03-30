@@ -5,6 +5,7 @@ from platform import system
 import serial
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
+import time
 
 SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 BAUDRATE = 9600
@@ -18,8 +19,10 @@ class Connection:
         self.in_session = False
         self.item = ''
 
-    def signal_back(self, data=0, price=0, text=''):
+    def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
+        if sleep > 0:
+            time.sleep(sleep)
         if text == '':
             text = '<{} {} gm Rs. {}>'.format(self.item, data, price)
         SignalBackThread(self.ser, text).start()
@@ -42,7 +45,7 @@ class Connection:
             if self.in_session:
                 print("out of session")
                 self.in_session = False
-                self.signal_back(text="Welcome!")
+                self.signal_back(text="Welcome!", sleep=5)
 
     def start(self):
         ''' Starts the Connection '''
