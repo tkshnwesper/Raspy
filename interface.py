@@ -18,10 +18,11 @@ class Connection:
         self.in_session = False
         self.item = ''
 
-    def signal_back(self, data, price):
+    def signal_back(self, data=0, price=0, text=''):
         ''' Writes back to serial '''
-        # self.ser.write('<{} {} gm Rs. {}>'.format(self.item, data, price))
-        SignalBackThread(self.ser, self.item, data, price).start()
+        if text != '':
+            text = '<{} {} gm Rs. {}>'.format(self.item, data, price)
+        SignalBackThread(self.ser, text).start()
 
     def process(self, data):
         ''' Processes the value obtained from the serial '''
@@ -40,6 +41,7 @@ class Connection:
         else:
             if self.in_session:
                 self.in_session = False
+                self.signal_back("Welcome!")
 
     def start(self):
         ''' Starts the Connection '''
