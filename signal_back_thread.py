@@ -12,7 +12,7 @@ class SignalBackThread(threading.Thread):
     def run(self):
         try:
             SignalBackThread.lock.acquire()
-            self.ser.write(bytes(self.text), 'UTF-8')
+            self.ser.write(bytes(self.text, 'UTF-8'))
             SignalBackThread.lock.release()
         except TypeError:
             pass
