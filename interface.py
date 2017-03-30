@@ -1,4 +1,5 @@
 ''' Interfaces arduino to raspberrypi '''
+# pylint: disable=C0103
 
 from platform import system
 import serial
@@ -25,7 +26,11 @@ class Connection:
     def process(self, data):
         ''' Processes the value obtained from the serial '''
         # Code to multiply with Price comes here
-        if int(data) >= MIN_WEIGHT:
+        try:
+            d = int(data)
+        except ValueError:
+            d = 0
+        if d >= MIN_WEIGHT:
             if not self.in_session:
                 CaptureThread()
                 self.in_session = True
