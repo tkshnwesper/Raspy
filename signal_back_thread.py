@@ -5,7 +5,7 @@ class SignalBackThread(threading.Thread):
     ''' SignalBackThread class '''
     lock = threading.Lock()
     def __init__(self, ser, item, data, price):
-        threading.Thread.__init__()
+        threading.Thread.__init__(self)
         self.data = data
         self.price = price
         self.item = item

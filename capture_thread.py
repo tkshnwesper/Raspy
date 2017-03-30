@@ -6,7 +6,7 @@ from client import Post
 class CaptureThread(threading.Thread):
     ''' DataThread class '''
     def __init__(self):
-        threading.Thread.__init__()
+        threading.Thread.__init__(self)
 
     def run(self):
         loc = capture()
