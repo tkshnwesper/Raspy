@@ -12,6 +12,9 @@ class SignalBackThread(threading.Thread):
         self.ser = ser
 
     def run(self):
-        SignalBackThread.lock.acquire()
-        self.ser.write('<{} {} gm Rs. {}>'.format(self.item, self.data, self.price))
-        SignalBackThread.lock.release()
+        try:
+            SignalBackThread.lock.acquire()
+            self.ser.write(bytes('<{} {} gm Rs. {}>'.format(self.item, self.data, self.price), 'UTF-8'))
+            SignalBackThread.lock.release()
+        except TypeError:
+            pass

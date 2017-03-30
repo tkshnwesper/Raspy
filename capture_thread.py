@@ -2,6 +2,7 @@
 import threading
 from cam import capture
 from client import Post
+import os
 
 class CaptureThread(threading.Thread):
     ''' DataThread class '''
@@ -12,3 +13,5 @@ class CaptureThread(threading.Thread):
         loc = capture()
         # post = Post(loc)
         # self.item = post.response.text
+        if os.path.exists(loc):
+            os.remove(loc)
