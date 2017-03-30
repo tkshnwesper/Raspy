@@ -16,7 +16,7 @@ class SignalBackThread(threading.Thread):
             time.sleep(self.sleep)
         try:
             SignalBackThread.lock.acquire()
-            self.ser.write(bytes(self.text, 'UTF-8'))
+            self.ser.write(bytes('<{}>'.format(self.text), 'UTF-8'))
             SignalBackThread.lock.release()
         except TypeError:
             pass
