@@ -1,5 +1,4 @@
 ''' Sends the image to server and prints out the response '''
-import os
 import requests
 
 URL = "http://192.168.43.199:8080/analyse"
