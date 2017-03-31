@@ -46,5 +46,11 @@ if __name__ == "__main__":
     from cherrypy.process import servers
     def fake_wait_for_occupied_port(host, port): return
     servers.wait_for_occupied_port = fake_wait_for_occupied_port
-    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
-    cherrypy.quickstart(Server())
+    # cherrypy.config.update({'server.socket_host': '0.0.0.0'})
+    config = {
+        'global': {
+            'server.socket_host': '0.0.0.0',
+            'server.socket_timeout' : 60
+        }
+    }
+    cherrypy.quickstart(Server(), '/', config)
