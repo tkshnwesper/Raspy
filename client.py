@@ -1,7 +1,8 @@
 ''' Sends the image to server and prints out the response '''
 import requests
+from cam import capture
 
-URL = "http://192.168.43.199:8080/analyse"
+URL = "http://192.168.1.9:8080/analyse"
 FOLDER = "client-image"
 # IMAGE_FILE = "banana.jpg"
 # FILES = {
@@ -17,5 +18,7 @@ class Post(object):
         self.response = requests.post(URL, files=files)
         # print(_response.text)
 
-# if __name__ == "__main__":
-#     Post()
+if __name__ == "__main__":
+    loc = capture()
+    post = Post(loc)
+    print(post.response.text)

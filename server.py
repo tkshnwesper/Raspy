@@ -19,7 +19,7 @@ class Server(object):
     @cherrypy.expose
     def analyse(self, img):
         ''' Serves /analyse path '''
-        imgname = uuid.uuid4().hex
+        imgname = uuid.uuid4().hex + '.jpeg'
         all_data = bytearray()
         # check if directory exists, if not creates one
         if not os.path.exists(IMAGE_DIRECTORY):
@@ -38,8 +38,8 @@ class Server(object):
         # run docker command
         result = subprocess.check_output(DOCKER_COMMAND, shell=True)
         # delete file
-        if os.path.exists(fname):
-            os.remove(fname)
+        # if os.path.exists(fname):
+        #     os.remove(fname)
         return result.decode("utf-8")
 
 if __name__ == "__main__":

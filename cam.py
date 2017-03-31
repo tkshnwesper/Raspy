@@ -4,7 +4,7 @@ import uuid
 import os
 
 IMAGE_DIR = 'client-image'
-COMMAND = 'raspistill -o {}'
+COMMAND = 'raspistill -o {}.jpeg'
 
 def capture():
     ''' Captures photo and names it as param '''
