@@ -4,11 +4,11 @@ import uuid
 import os
 
 IMAGE_DIR = 'client-image'
-COMMAND = 'raspistill -o {}.jpeg'
+COMMAND = 'raspistill -o {}'
 
 def capture():
     ''' Captures photo and names it as param '''
-    name = uuid.uuid4().hex
+    name = uuid.uuid4().hex + '.jpeg'
     if not os.path.exists(IMAGE_DIR):
         os.makedirs(IMAGE_DIR)
     loc = os.path.join(IMAGE_DIR, name)
