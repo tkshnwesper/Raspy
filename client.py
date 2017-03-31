@@ -13,7 +13,7 @@ class Post(object):
     ''' Post object '''
     def __init__(self, fname):
         files = {
-            'img': open(os.path.join(FOLDER, fname), "rb")
+            'img': open(fname, "rb")
         }
         self.response = requests.post(URL, files=files)
         # print(_response.text)
