@@ -2,7 +2,7 @@
 import os
 import requests
 
-URL = "http://127.0.0.1:8080/analyse"
+URL = "http://192.168.43.199:8080/analyse"
 FOLDER = "client-image"
 # IMAGE_FILE = "banana.jpg"
 # FILES = {

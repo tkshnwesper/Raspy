@@ -11,7 +11,8 @@ class CaptureThread(threading.Thread):
 
     def run(self):
         loc = capture()
-        # post = Post(loc)
-        # self.item = post.response.text
+        post = Post(loc)
+        self.item = post.response.text
+        print(self.item)
         if os.path.exists(loc):
             os.remove(loc)
