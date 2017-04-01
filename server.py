@@ -7,7 +7,7 @@ import subprocess
 import cherrypy
 
 IMAGE_DIRECTORY = "server-image"
-DOCKER_COMMAND = "dir"
+# DOCKER_COMMAND = "dir"
 
 class Server(object):
     ''' Server class '''
@@ -36,11 +36,11 @@ class Server(object):
         _file.write(all_data)
         _file.close()
         # run docker command
-        result = subprocess.check_output(DOCKER_COMMAND, shell=True)
+        # result = subprocess.check_output(DOCKER_COMMAND, shell=True)
         # delete file
         # if os.path.exists(fname):
         #     os.remove(fname)
-        return result.decode("utf-8")
+        return imgname
 
 if __name__ == "__main__":
     from cherrypy.process import servers
