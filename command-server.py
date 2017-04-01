@@ -27,7 +27,7 @@ if __name__ == "__main__":
         'global': {
             'server.socket_host': '0.0.0.0',
             'server.socket_timeout' : 60,
-            'server.socket_port': '9090'
+            'server.socket_port': 9090
         }
     }
     cherrypy.quickstart(Command(), '/', config)
