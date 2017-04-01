@@ -10,7 +10,7 @@ class Command(object):
     def index(self, imgname):
         ''' executes command '''
         result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
-        delete file
+        # delete file
         if os.path.exists(fname):
             os.remove(fname)
 
