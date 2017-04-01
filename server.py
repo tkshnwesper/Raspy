@@ -50,7 +50,8 @@ if __name__ == "__main__":
     config = {
         'global': {
             'server.socket_host': '0.0.0.0',
-            'server.socket_timeout' : 60
+            'server.socket_timeout' : 60,
+            'server.socket_port': '8080'
         }
     }
     cherrypy.quickstart(Server(), '/', config)
