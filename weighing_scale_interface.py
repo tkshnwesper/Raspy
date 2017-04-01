@@ -1,6 +1,6 @@
-import RPi.GPIO as GPIO
 import time
 import sys
+import RPi.GPIO as GPIO
 from hx711 import HX711
 
 def cleanAndExit():
@@ -9,23 +9,26 @@ def cleanAndExit():
     print("Bye!")
     sys.exit()
 
-hx = HX711(5, 6)
+class WeighingScale(object):
+    def __init__(self):
+        self.hx = HX711(5, 6)
 
-hx.set_reading_format("LSB", "MSB")
+        self.hx.set_reading_format("LSB", "MSB")
 
-hx.set_reference_unit(92 * 858 / 226)
+        self.hx.set_reference_unit(92 * 858 / 226)
 
-hx.reset()
-hx.tare()
+        self.hx.reset()
+        self.hx.tare()
 
-while True:
-    try:
+    def loop(self, fn):
+        while True:
+            try:
+                val = int(self.hx.get_weight(5)[0])
+                print(val)
+                fn(val)
 
-        val = int(hx.get_weight(5)[0])
-        print(val)
-
-        hx.power_down()
-        hx.power_up()
-        time.sleep(0.5)
-    except (KeyboardInterrupt, SystemExit):
-        cleanAndExit()
+                self.hx.power_down()
+                self.hx.power_up()
+                time.sleep(0.5)
+            except (KeyboardInterrupt, SystemExit):
+                cleanAndExit()

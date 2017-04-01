@@ -1,8 +1,9 @@
 from RPLCD import CharLCD
 
-def main():
-    lcd = CharLCD(rows=2, cols=16)
-    lcd.write_string('Hello world')
-
-if __name__ == '__main__':
-    main()
+class LCD(object):
+    def __init__(self):
+        self.lcd = CharLCD(rows=2, cols=16)
+    
+    def write(self, text):
+        self.lcd.write_string(text)
+        

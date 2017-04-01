@@ -5,6 +5,7 @@ from platform import system
 import serial
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
+from weighing_scale_interface import WeighingScale
 
 SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 BAUDRATE = 9600
@@ -14,7 +15,6 @@ MIN_WEIGHT = 50
 class Connection:
     ''' Creates and manages connection '''
     def __init__(self):
-        self.ser = serial.Serial(SERIAL_ARG, BAUDRATE, timeout=0)
         self.in_session = False
         self.item = ''
         self.accuracy = 0.0
@@ -26,7 +26,7 @@ class Connection:
                 text = 'Insufficient accuracy'
             else:
                 text = '{} {} gm Rs. {}'.format(self.item, data, price)
-        SignalBackThread(self.ser, text, sleep).start()
+        SignalBackThread(text, sleep).start()
 
     def process(self, data):
         ''' Processes the value obtained from the serial '''
@@ -50,17 +50,7 @@ class Connection:
 
     def start(self):
         ''' Starts the Connection '''
-        buffer = []
-        while True:
-            line = self.ser.readline()
-            if len(line) > 0:
-                buffer.append(line)
-                # print(buffer)
-                if b''.join(buffer).endswith(b'\r\n'):
-                    val = b''.join(buffer).split(b'\r\n')[0].decode('utf-8')
-                    print(val)
-                    self.process(val)
-                    buffer.clear()
+        WeighingScale().loop(self.process)
 
 if __name__ == '__main__':
     __con__ = Connection()
