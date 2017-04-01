@@ -1,18 +1,22 @@
 ''' Executes the command '''
 
+import subprocess
+import os
 import cherrypy
 
 IMAGE_DIRECTORY = "server-image"
-DOCKER_COMMAND = "dir"
+DOCKER_COMMAND = "python /tf_files/label_image.py /tf_files/Raspy/server-image/{}"
 
 class Command(object):
     @cherrypy.expose
     def index(self, imgname):
         ''' executes command '''
         result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
-        # delete file
-        if os.path.exists(fname):
-            os.remove(fname)
+        ## delete file
+        # fname = '{}/{}'.format(IMAGE_DIRECTORY, imgname)
+        # if os.path.exists(fname):
+        #     os.remove(fname)
+        return result
 
 if __name__ == "__main__":
     from cherrypy.process import servers

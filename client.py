@@ -2,7 +2,7 @@
 import requests
 from cam import capture
 
-_U = 'http://192.168.1.9'
+_U = 'http://192.168.1.4'
 URL = _U + ":8080/analyse"
 COMMAND_URL = _U + ':9090'
 FOLDER = "client-image"
