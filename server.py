@@ -9,7 +9,7 @@ DOCKER_COMMAND = "python /tf_files/label_image.py /tf_files/Raspy/server-image/{
 
 class Command(object):
     @cherrypy.expose
-    def index(self, imgname):
+    def analyse(self, imgname):
         ''' executes command '''
         result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
         ## delete file

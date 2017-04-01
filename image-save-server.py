@@ -13,11 +13,6 @@ class Server(object):
     ''' Server class '''
     @cherrypy.expose
     def index(self):
-        ''' Serves /index path '''
-        return "Welcome to the FYP Server. POST /analyse [image file] : plain/text"
-
-    @cherrypy.expose
-    def analyse(self, img):
         ''' Serves /analyse path '''
         imgname = uuid.uuid4().hex + '.jpeg'
         all_data = bytearray()
