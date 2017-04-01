@@ -5,7 +5,7 @@ import os
 import cherrypy
 
 IMAGE_DIRECTORY = "server-image"
-DOCKER_COMMAND = "python /tf_files/label_image.py /tf_files/Raspy/server-image/{}"
+DOCKER_COMMAND = "python /tf_files/label_image1.py /tf_files/Raspy/server-image/{}"
 
 class Command(object):
     @cherrypy.expose
