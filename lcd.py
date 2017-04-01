@@ -1,4 +1,4 @@
-from RPLCD.i2c import CharLCD
+from RPLCD import CharLCD
 
 def main():
     lcd = CharLCD(rows=2, cols=16)
@@ -6,4 +6,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
