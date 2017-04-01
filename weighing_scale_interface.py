@@ -21,7 +21,7 @@ hx.tare()
 while True:
     try:
 
-        val = hx.get_weight(5)
+        val = int(hx.get_weight(5)[0])
         print(val)
 
         hx.power_down()
