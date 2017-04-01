@@ -12,7 +12,7 @@ IMAGE_DIRECTORY = "server-image"
 class Server(object):
     ''' Server class '''
     @cherrypy.expose
-    def index(self):
+    def index(self, img):
         ''' Serves /analyse path '''
         imgname = uuid.uuid4().hex + '.jpeg'
         all_data = bytearray()
