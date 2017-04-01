@@ -17,6 +17,7 @@ class Connection:
         self.ser = serial.Serial(SERIAL_ARG, BAUDRATE, timeout=0)
         self.in_session = False
         self.item = ''
+        self.accuracy = 0.0
 
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
@@ -34,7 +35,7 @@ class Connection:
         print('data = {}'.format(d))
         if d >= MIN_WEIGHT:
             if not self.in_session:
-                CaptureThread().start()
+                CaptureThread(self).start()
                 self.in_session = True
             else:
                 self.signal_back(d, d * 2)
