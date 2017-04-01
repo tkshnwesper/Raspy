@@ -22,7 +22,10 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
-            text = '{} {} gm Rs. {}'.format(self.item, data, price)
+            if self.accuracy < .5:
+                text = 'Insufficient accuracy'
+            else:
+                text = '{} {} gm Rs. {}'.format(self.item, data, price)
         SignalBackThread(self.ser, text, sleep).start()
 
     def process(self, data):

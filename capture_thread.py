@@ -17,6 +17,6 @@ class CaptureThread(threading.Thread):
         print(pname.response.text)
         v = pname.response.text.split(' ')
         self.conn.item = ''.join(v[:len(v) - 1])
-        self.conn.accuracy = v[len(v) - 1]
+        self.conn.accuracy = float(v[len(v) - 1])
         if os.path.exists(loc):
             os.remove(loc)
