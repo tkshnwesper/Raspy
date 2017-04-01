@@ -13,7 +13,7 @@ hx = HX711(5, 6)
 
 hx.set_reading_format("LSB", "MSB")
 
-hx.set_reference_unit(92)
+hx.set_reference_unit(92 * 858 / 226)
 
 hx.reset()
 hx.tare()
