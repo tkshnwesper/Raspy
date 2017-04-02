@@ -22,8 +22,10 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
-            if self.accuracy < .5:
-                text = 'Insufficient accuracy'
+            if self.item == '':
+                text = '{} gm\nProcessing...'.format(data)
+            elif self.accuracy < .5:
+                text = 'Insufficient\naccuracy'
             else:
                 text = '{} {} gm Rs. {}'.format(self.item, data, price)
         SignalBackThread(text, sleep).start()
@@ -47,6 +49,9 @@ class Connection:
                 print("out of session")
                 self.in_session = False
                 self.signal_back(text="Welcome!", sleep=2)
+                self.item = ''
+                self.accuracy = 0.0
+
 
     def start(self):
         ''' Starts the Connection '''
