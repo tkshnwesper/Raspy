@@ -23,7 +23,7 @@ class Connection:
         ''' Writes back to serial '''
         if text == '':
             if self.item == '':
-                text = '{} gm Processing...'.format(data)
+                text = '{} gm'.format(data) + ' ' * 7 + 'Processing...'
             elif self.accuracy < .5:
                 text = 'Insufficient    accuracy'
             else:
