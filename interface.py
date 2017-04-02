@@ -23,9 +23,9 @@ class Connection:
         ''' Writes back to serial '''
         if text == '':
             if self.item == '':
-                text = '{} gm\nProcessing...'.format(data)
+                text = '{} gm Processing...'.format(data)
             elif self.accuracy < .5:
-                text = 'Insufficient\naccuracy'
+                text = 'Insufficient    accuracy'
             else:
                 text = '{} {} gm Rs. {}'.format(self.item, data, price)
         SignalBackThread(text, sleep).start()
