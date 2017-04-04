@@ -18,6 +18,7 @@ class Connection:
         self.in_session = False
         self.item = ''
         self.accuracy = 0.0
+        self.signal_back(text='Welcome!')
 
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
