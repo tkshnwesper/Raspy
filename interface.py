@@ -50,8 +50,8 @@ class Connection:
                 print("out of session")
                 self.in_session = False
                 self.signal_back(text="Welcome!", sleep=2)
-                self.item = ''
-                self.accuracy = 0.0
+            self.item = ''
+            self.accuracy = 0.0
 
 
     def start(self):
