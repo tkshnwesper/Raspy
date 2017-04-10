@@ -11,7 +11,7 @@ from price import PriceDict
 # SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 # BAUDRATE = 9600
 
-PRICES = PriceDict().priceMap
+PRICES = PriceDict().price_map
 
 MIN_WEIGHT = 50
 

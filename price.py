@@ -1,4 +1,7 @@
 ''' Gets the prices list from the CouchDB server '''
+
+# pylint: disable=C0103
+
 import json
 import requests
 
@@ -22,13 +25,13 @@ class PriceDict(object):
         self.cookie = a + '=' + r.cookies[a]
         h = {'set-cookie': self.cookie}
         r = requests.get(BASE_URL + '/shopkeeper/shops:' + USERNAME, headers=h)
-        self.priceMap = {}
+        self.price_map = {}
         try:
-            self.priceMap = json.loads(r.text)['shops'][SHOP_NAME]
-        except:
+            self.price_map = json.loads(r.text)['shops'][SHOP_NAME]
+        except ValueError:
             pass
-        print(self.priceMap)
 
 
 if __name__ == '__main__':
     PriceDict()
+    
