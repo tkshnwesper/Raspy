@@ -1,7 +1,7 @@
 ''' Interfaces arduino to raspberrypi '''
 # pylint: disable=C0103
 
-from platform import system
+# from platform import system
 # import serial
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
