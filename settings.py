@@ -1,5 +1,7 @@
+''' Module which helps shopkeeper to update creds '''
 import json
 from flask import request, render_template, Flask
+
 
 app = Flask(__name__)
 
@@ -15,3 +17,4 @@ def index():
         with open('creds.json', 'w') as f:
             f.write(json.dumps(request.form))
         return 'Changes saved successfully'
+        

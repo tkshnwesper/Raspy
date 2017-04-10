@@ -6,7 +6,6 @@ d = {}
 with open('creds.json') as f:
     d = json.loads(f.read())
 
-
 USERNAME = d['username']
 PASSWORD = d['password']
 SHOP_NAME = d['shop_name']
