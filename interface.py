@@ -40,7 +40,7 @@ class Connection:
         try:
             d = float(data)
         except ValueError:
-            d = 0
+            d = 0.0
         print('data = {}'.format(d))
         if d >= MIN_WEIGHT:
             if not self.in_session:
