@@ -6,9 +6,12 @@
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
 from weighing_scale_interface import WeighingScale
+from price import PriceDict
 
 # SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 # BAUDRATE = 9600
+
+PRICES = PriceDict().priceMap
 
 MIN_WEIGHT = 50
 
@@ -44,7 +47,10 @@ class Connection:
                 CaptureThread(self).start()
                 self.in_session = True
             else:
-                self.signal_back(d, d * 2)
+                if self.item in PRICES.keys():
+                    self.signal_back(d, PRICES[self.item])
+                else:
+                    self.signal_back(text="Product not found")
         else:
             if self.in_session:
                 print("out of session")

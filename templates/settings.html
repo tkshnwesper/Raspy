@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Change settings</title>
+    </head>
+    <body>
+        <form method="POST">
+            <label>
+                Username
+                <input type="text" name='username' value="{{ username }}">
+            </label>
+            <label>
+                Password
+                <input type="password" name="password" value="{{ password }}">
+            </label>
+            <label>
+                Shop name
+                <input type="text" name="shop_name" value="{{ shop_name }}">
+            </label>
+            <input type="submit" value="Save Changes">
+        </form>
+    </body>
+</html>
