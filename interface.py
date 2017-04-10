@@ -2,13 +2,13 @@
 # pylint: disable=C0103
 
 from platform import system
-import serial
+# import serial
 from signal_back_thread import SignalBackThread
 from capture_thread import CaptureThread
 from weighing_scale_interface import WeighingScale
 
-SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
-BAUDRATE = 9600
+# SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
+# BAUDRATE = 9600
 
 MIN_WEIGHT = 50
 
