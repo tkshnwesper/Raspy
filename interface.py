@@ -11,7 +11,7 @@ from price import PriceDict
 # SERIAL_ARG = 'COM3' if system() == 'Windows' else '/dev/ttyACM0'
 # BAUDRATE = 9600
 
-PRICES = PriceDict().price_map
+# PRICES = PriceDict().price_map
 
 MIN_WEIGHT = 50
 
@@ -47,10 +47,10 @@ class Connection:
                 CaptureThread(self).start()
                 self.in_session = True
             else:
-                if self.item in PRICES.keys():
-                    self.signal_back(d, PRICES[self.item])
-                else:
-                    self.signal_back(text="Product not found")
+            #     if self.item in PRICES.keys():
+                self.signal_back(d, PRICES[self.item])
+            #     else:
+            #         self.signal_back(text="Product not found")
         else:
             if self.in_session:
                 print("out of session")
