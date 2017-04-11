@@ -14,8 +14,8 @@ class Command(object):
         result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
         ## delete file
         fname = '{}/{}'.format(IMAGE_DIRECTORY, imgname)
-        if os.path.exists(fname):
-            os.remove(fname)
+        #if os.path.exists(fname):
+        #    os.remove(fname)
         return result
 
 if __name__ == "__main__":
