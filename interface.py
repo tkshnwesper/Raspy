@@ -14,6 +14,7 @@ from price import PriceDict
 PRICES = PriceDict().price_map
 
 MIN_WEIGHT = 50
+MAX_WEIGHT = 5000
 
 class Connection:
     ''' Creates and manages connection '''
@@ -27,9 +28,9 @@ class Connection:
         ''' Writes back to serial '''
         if text == '':
             if self.item == '':
-                text = '{} gm'.format(data) + ' ' * 7 + 'Processing...'
+                text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
             elif self.accuracy < .5:
-                text = 'Insufficient    accuracy'
+                text = 'Insufficient     accuracy'
             else:
                 text = '{} {} gm Rs. {}'.format(self.item, data, price)
         SignalBackThread(text, sleep).start()
@@ -41,16 +42,21 @@ class Connection:
             d = float(data)
         except ValueError:
             d = 0.0
+        if d > MAX_WEIGHT:
+            d = 0.0
+            print("Over weight")
         print('data = {}'.format(d))
         if d >= MIN_WEIGHT:
             if not self.in_session:
                 CaptureThread(self).start()
                 self.in_session = True
             else:
-                if self.item in PRICES.keys():
-                    self.signal_back(d, PRICES[self.item])
+                if self.item == '':
+                    self.signal_back(data)
+                elif self.item in PRICES.keys():
+                    self.signal_back(d, PRICES[self.item]*data/1000)
                 else:
-                    self.signal_back(text="Product not found")
+                    self.signal_back(text="Product not     found")
         else:
             if self.in_session:
                 print("out of session")
