@@ -51,7 +51,9 @@ class Connection:
                 CaptureThread(self).start()
                 self.in_session = True
             else:
-                if self.item in PRICES.keys():
+                if self.item == '':
+                    self.signal_back(data)
+                elif self.item in PRICES.keys():
                     self.signal_back(d, PRICES[self.item]*data/1000)
                 else:
                     self.signal_back(text="Product not found")
