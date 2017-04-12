@@ -14,6 +14,7 @@ from price import PriceDict
 PRICES = PriceDict().price_map
 
 MIN_WEIGHT = 50
+MAX_WEIGHT = 5000
 
 class Connection:
     ''' Creates and manages connection '''
@@ -40,7 +41,10 @@ class Connection:
         try:
             d = float(data)
         except ValueError:
-            d = 0
+            d = 0.0
+        if d > MAX_WEIGHT:
+            d = 0.0
+            print("Over weight")
         print('data = {}'.format(d))
         if d >= MIN_WEIGHT:
             if not self.in_session:
@@ -48,7 +52,7 @@ class Connection:
                 self.in_session = True
             else:
                 if self.item in PRICES.keys():
-                    self.signal_back(d, PRICES[self.item])
+                    self.signal_back(d, PRICES[self.item]*data/1000)
                 else:
                     self.signal_back(text="Product not found")
         else:
