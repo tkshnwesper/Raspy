@@ -13,7 +13,7 @@ USERNAME = d['username']
 PASSWORD = d['password']
 SHOP_NAME = d['shop_name']
 
-BASE_URL = 'http://localhost:5984'
+BASE_URL = 'http://localhost:6984'
 
 class PriceDict(object):
     ''' Makes request and holds data '''
