@@ -3,17 +3,19 @@
 import subprocess
 import os
 import cherrypy
+from label_image1 import process_image
 
 IMAGE_DIRECTORY = "server-image"
-DOCKER_COMMAND = "python /tf_files/label_image1.py /tf_files/Raspy/server-image/{}"
+# DOCKER_COMMAND = "python /tf_files/label_image1.py /tf_files/Raspy/server-image/{}"
 
 class Command(object):
     @cherrypy.expose
     def analyse(self, imgname):
         ''' executes command '''
-        result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
+        # result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
         ## delete file
         fname = '{}/{}'.format(IMAGE_DIRECTORY, imgname)
+        process_image(fname)
         if os.path.exists(fname):
             os.remove(fname)
         return result
