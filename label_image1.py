@@ -31,7 +31,7 @@ def process_image(path):
 
         human_string = label_lines[top_k[0]]
         score = predictions[0][top_k[0]]
-        print('%s %.1f' % (human_string, score))
+        return '%s %.1f' % (human_string, score)
 
     os.remove(image_path)
 
