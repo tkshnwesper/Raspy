@@ -12,6 +12,7 @@ from price import PriceDict
 # BAUDRATE = 9600
 
 PRICES = PriceDict().price_map
+print(PRICES)
 
 MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
