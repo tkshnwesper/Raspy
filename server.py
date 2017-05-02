@@ -58,7 +58,6 @@ class Command(object):
         del COMPLETED_JOBS[fname]
         if os.path.exists(fname):
             os.remove(fname)
-        print
         return result
 
 if __name__ == "__main__":

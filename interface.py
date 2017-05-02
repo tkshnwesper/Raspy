@@ -53,9 +53,9 @@ class Connection:
                 self.in_session = True
             else:
                 if self.item == '':
-                    self.signal_back(data)
+                    self.signal_back(d)
                 elif self.item in PRICES.keys():
-                    self.signal_back(d, PRICES[self.item]*data/1000)
+                    self.signal_back(d, PRICES[self.item]*d/1000)
                 else:
                     self.signal_back(text="Product not     found")
         else:
