@@ -18,7 +18,7 @@ class Post(object):
             'img': open(fname, "rb")
         }
         self.response = requests.post(IMAGE_SAVE_URL, files=files)
-        # print(_response.text)
+        print(self.response.text)
 
 class PostName(object):
     ''' Post image name '''
