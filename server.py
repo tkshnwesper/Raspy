@@ -49,8 +49,8 @@ class Command(object):
             # time.sleep(5)
         # result = subprocess.check_output(DOCKER_COMMAND.format(imgname), shell=True)
         ## delete file
-        # fname = '{}/{}'.format(IMAGE_DIRECTORY, imgname)
-        fname = 'img.jpg'
+        fname = '{}/{}'.format(IMAGE_DIRECTORY, imgname)
+        # fname = 'img.jpg'
         JOBS.append(fname)
         while fname not in COMPLETED_JOBS.keys():
             pass
