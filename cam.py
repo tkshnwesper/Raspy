@@ -14,3 +14,6 @@ def capture():
     loc = os.path.join(IMAGE_DIR, name)
     subprocess.check_output(COMMAND.format(loc), shell=True)
     return loc
+
+if __name__ == '__main__':
+    print(capture())
