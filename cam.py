@@ -14,7 +14,8 @@ def capture():
         os.makedirs(IMAGE_DIR)
     loc = os.path.join(IMAGE_DIR, name)
     # subprocess.check_output(COMMAND.format(loc), shell=True)
-    PiCamera().capture(loc)
+    with PiCamera() as camera:
+        camera.capture(loc)
     return loc
 
 if __name__ == '__main__':
