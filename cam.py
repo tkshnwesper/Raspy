@@ -2,9 +2,10 @@
 import subprocess
 import uuid
 import os
+from picamera import PiCamera
 
 IMAGE_DIR = 'client-image'
-COMMAND = 'raspistill -o {}'
+# COMMAND = 'raspistill -o {}'
 
 def capture():
     ''' Captures photo and names it as param '''
@@ -12,7 +13,8 @@ def capture():
     if not os.path.exists(IMAGE_DIR):
         os.makedirs(IMAGE_DIR)
     loc = os.path.join(IMAGE_DIR, name)
-    subprocess.check_output(COMMAND.format(loc), shell=True)
+    # subprocess.check_output(COMMAND.format(loc), shell=True)
+    PiCamera().capture(loc)
     return loc
 
 if __name__ == '__main__':
