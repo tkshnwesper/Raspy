@@ -23,7 +23,7 @@ class WeighingScale(object):
     def loop(self, fn):
         while True:
             try:
-                val = int(self.hx.get_weight(5)[0])
+                val = int(self.hx.get_weight(10)[0])
                 print(val)
                 fn(val)
 
