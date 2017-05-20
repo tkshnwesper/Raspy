@@ -19,12 +19,12 @@ class ThreadLoop(threading.Thread):
         global JOBS, COMPLETED_JOBS
         from label_image1 import process_image
         # Unpersists graph from file
-        f = tf.gfile.FastGFile("/home/nitin/tf_files/retrained_graph.pb", 'rb')
+        f = tf.gfile.FastGFile("/home/nitin/gg_detect/retrained_graph.pb", 'rb')
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
         _ = tf.import_graph_def(graph_def, name='')
         label_lines = [line.rstrip() for line
-                       in tf.gfile.GFile("/home/nitin/tf_files/retrained_labels.txt")]
+                       in tf.gfile.GFile("/home/nitin/gg_detect/retrained_labels.txt")]
         with tf.Session() as sess:
             while(True):
                 if len(JOBS) == 0:
