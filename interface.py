@@ -16,6 +16,7 @@ print(PRICES)
 
 MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
+last_data=0
 
 class Connection:
     ''' Creates and manages connection '''
@@ -28,12 +29,14 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
+            if(abs(last_data - data) > 10):
+                last_data=data
             if self.item == '':
-                text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
+                text = '{} gm'.format(last_data) + ' ' * 10 + 'Processing...'
             elif self.accuracy < .5:
                 text = 'Insufficient     accuracy'
             else:
-                text = '{} {} gm Rs. {}'.format(self.item, data, price)
+                text = '{} {} gm Rs. {}'.format(self.item, last_data, price)
         SignalBackThread(text, sleep).start()
 
     def process(self, data):
