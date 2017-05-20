@@ -29,11 +29,11 @@ class Connection:
         ''' Writes back to serial '''
         if text == '':
             if self.item == '':
-                text = '{} gm'.format(last_data) + ' ' * 10 + 'Processing...'
+                text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
             elif self.accuracy < .5:
                 text = 'Insufficient     accuracy'
             else:
-                text = '{} {} gm Rs. {}'.format(self.item, last_data, price)
+                text = '{} {} gm Rs. {}'.format(self.item, data, price)
         SignalBackThread(text, sleep).start()
 
     def process(self, data):
