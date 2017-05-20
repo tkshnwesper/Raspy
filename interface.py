@@ -16,7 +16,6 @@ print(PRICES)
 
 MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
-last_data=0
 
 class Connection:
     ''' Creates and manages connection '''
@@ -29,6 +28,8 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
+            if(data == 0):
+                last_data=0
             if(abs(last_data - data) > 10):
                 last_data=data
             if self.item == '':
