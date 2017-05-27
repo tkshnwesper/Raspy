@@ -26,7 +26,6 @@ class Post(object):
 class PostName(object):
     ''' Post image name '''
     def __init__(self, imgname):
-        print("????????????????"+imgname)
         self.response = requests.post(URL, data={'imgname': imgname})
 
 
