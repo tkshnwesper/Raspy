@@ -13,13 +13,13 @@ from price import PriceDict
 
 PRICES = PriceDict().price_map
 print(PRICES)
-lastdata = 0
 MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
 
 class Connection:
     ''' Creates and manages connection '''
     def __init__(self):
+        self.lastdata = 0
         self.in_session = False
         self.item = ''
         self.accuracy = 0.0
@@ -29,7 +29,7 @@ class Connection:
         ''' Writes back to serial '''
         if text == '':
             if(abs(lastdata-data)>=10):
-                lastdata=data
+                self.lastdata=data
             if self.item == '':
                 text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
             elif self.accuracy < .5:
