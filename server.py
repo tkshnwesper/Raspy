@@ -56,8 +56,8 @@ class Command(object):
             pass
         result = COMPLETED_JOBS[fname]
         del COMPLETED_JOBS[fname]
-        if os.path.exists(fname):
-            os.remove(fname)
+        '''if os.path.exists(fname):
+            os.remove(fname)'''
         return result
 
 if __name__ == "__main__":
