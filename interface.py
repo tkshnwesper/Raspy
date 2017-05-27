@@ -13,7 +13,7 @@ from price import PriceDict
 
 PRICES = PriceDict().price_map
 print(PRICES)
-
+lastdata = 0
 MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
 
@@ -28,6 +28,8 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
+            if(abs(lastdata-data)>=10):
+                lastdata=data
             if self.item == '':
                 text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
             elif self.accuracy < .5:
