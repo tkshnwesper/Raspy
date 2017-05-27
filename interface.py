@@ -13,7 +13,7 @@ from price import PriceDict
 
 PRICES = PriceDict().price_map
 print(PRICES)
-MIN_WEIGHT = 30
+MIN_WEIGHT = 50
 MAX_WEIGHT = 5000
 
 class Connection:
@@ -28,7 +28,7 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
-            if(abs(self.lastdata-data)>=30):
+            if(abs(self.lastdata-data)>=50):
                 self.lastdata=data
             if self.item == '':
                 text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
