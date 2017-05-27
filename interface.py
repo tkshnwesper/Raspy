@@ -28,7 +28,7 @@ class Connection:
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
-            if(abs(lastdata-data)>=10):
+            if(abs(self.lastdata-data)>=10):
                 self.lastdata=data
             if self.item == '':
                 text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
