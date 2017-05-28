@@ -4,7 +4,7 @@ import subprocess
 import os
 import sys
 import threading
-import time
+# import time
 import cherrypy
 import tensorflow as tf
 
@@ -27,8 +27,8 @@ class ThreadLoop(threading.Thread):
                        in tf.gfile.GFile("/home/nitin/gg_detect/retrained_labels.txt")]
         with tf.Session() as sess:
             while(True):
-                if len(JOBS) == 0:
-                    time.sleep(0.25)
+                while len(JOBS) == 0:
+                    pass
                 else:
                     fname = JOBS.pop()
                     COMPLETED_JOBS[fname] = process_image(fname, label_lines, sess)
