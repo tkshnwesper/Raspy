@@ -28,7 +28,7 @@ class ThreadLoop(threading.Thread):
         with tf.Session() as sess:
             while(True):
                 if len(JOBS) == 0:
-                    time.sleep(1)
+                    time.sleep(0.25)
                 else:
                     fname = JOBS.pop()
                     COMPLETED_JOBS[fname] = process_image(fname, label_lines, sess)
