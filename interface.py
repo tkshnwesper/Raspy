@@ -31,11 +31,11 @@ class Connection:
             if(abs(self.lastdata-data)>=20):
                 self.lastdata=data
             if self.item == '':
-                text = '{} gm'.format(data) + ' ' * 10 + 'Processing...'
+                text = '{} gm\r\nProcessing...'.format(data)
             elif self.accuracy < .5:
-                text = 'Insufficient     accuracy'
+                text = 'Insufficient\r\naccuracy'
             else:
-                text = '{} {} gm Rs. {}'.format(self.item, data, price)
+                text = '{} {} gm\r\nPrice: Rs. {}'.format(self.item, data, price)
         SignalBackThread(text, sleep).start()
 
     def process(self, data):
@@ -60,7 +60,7 @@ class Connection:
                     self.signal_back(d, PRICES[self.item]*d/1000)
                 else:
                     print(self.item)
-                    self.signal_back(text="Product not     found")
+                    self.signal_back(text="Product not\r\nfound")
         else:
             if self.in_session:
                 print("out of session")
