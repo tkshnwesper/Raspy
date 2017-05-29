@@ -3,7 +3,7 @@ import requests
 import os
 from cam import capture
 
-_U = 'http://192.168.43.199'
+_U = 'http://192.168.0.106'
 URL = _U + ":8080/analyse"
 IMAGE_SAVE_URL = _U + ':9090'
 FOLDER = "client-image"
@@ -27,7 +27,7 @@ class PostName(object):
     ''' Post image name '''
     def __init__(self, imgname):
         self.response = requests.post(URL, data={'imgname': imgname})
-
+        print(">>>>>>>>>>>>>>>>>"+imgname)
 
 if __name__ == "__main__":
     loc = capture()
