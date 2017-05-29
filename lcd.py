@@ -1,3 +1,4 @@
+'''Module which writes to the LCD'''
 from RPLCD import CharLCD
 from RPi import GPIO
 
