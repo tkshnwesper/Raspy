@@ -32,7 +32,7 @@ class Connection:
             elif self.accuracy < .5:
                 text = 'Insufficient\r\naccuracy'
             else:
-                text = '{}\r\n{:d}gm Rs {:.1f}'.format(self.item, self.lastdata, self.calculate_price(self.lastdata))
+                text = '{}\r\n{}gm Rs {:.1f}'.format(self.item, int(self.lastdata), self.calculate_price(self.lastdata))
         SignalBackThread(text, sleep).start()
 
     def process(self, data):
