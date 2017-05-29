@@ -14,28 +14,25 @@ class Connection:
     ''' Creates and manages connection '''
     def __init__(self):
         self.lastdata = 0
-        self.lastprice=0.0
         self.in_session = False
         self.item = ''
         self.accuracy = 0.0
         self.signal_back(text='Welcome!')
+        
+    def calculate_price(self, d):
+        return PRICES[self.item]*d/1000
 
     def signal_back(self, data=0, price=0, text='', sleep=0):
         ''' Writes back to serial '''
         if text == '':
-            if(abs(self.lastdata-data)>=20):
-                print("last "+str(self.lastdata)+"  data "+str(data)+"  price"+str(price))
-                self.lastdata=data
-            if(abs(self.lastprice-price)>1):
-                self.lastprice=price
-            d5= int(self.lastdata)
-            p5= float('{0:.1f}'.format(self.lastprice))
+            if(abs(self.lastdata - data) >= 20):
+                self.lastdata = data
             if self.item == '':
                 text = '{} gm\r\nProcessing...'.format(self.lastdata)
             elif self.accuracy < .5:
                 text = 'Insufficient\r\naccuracy'
             else:
-                text = '{}\r\n{} gm  Rs.{}'.format(self.item, d5, p5)
+                text = '{}\r\n{:d}gm Rs {:.1f}'.format(self.item, self.lastdata, self.calculate_price(self.lastdata))
         SignalBackThread(text, sleep).start()
 
     def process(self, data):
@@ -57,7 +54,7 @@ class Connection:
                 if self.item == '':
                     self.signal_back(d)
                 elif self.item in PRICES.keys():
-                    self.signal_back(d, PRICES[self.item]*d/1000)
+                    self.signal_back(d)
                 else:
                     print(self.item)
                     self.signal_back(text="Product not\r\nfound")
